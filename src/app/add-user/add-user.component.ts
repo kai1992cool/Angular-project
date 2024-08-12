@@ -65,17 +65,17 @@ export class AddUserComponent implements AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    const confirmModalElement = document.getElementById('confirmModal');
-    if (confirmModalElement) {
-      const saveButton = confirmModalElement.querySelector('.btn-primary');
-      if (saveButton) {
-        saveButton.addEventListener('click', () => {
-          this.confirmAddUserAndNavigate();
-        });
-      }
+    ngAfterViewInit(): void {
+      // const confirmModalElement = document.getElementById('confirmModal');
+      // if (confirmModalElement) {
+      //   const saveButton = confirmModalElement.querySelector('.btn-primary');
+      //   if (saveButton) {
+      //     saveButton.addEventListener('click', () => {
+      //       this.confirmAddUserAndNavigate();
+      //     });
+      //   }
+      // }
     }
-  }
 
   confirmAddUserAndNavigate(): void {
     this.confirmAddUser();

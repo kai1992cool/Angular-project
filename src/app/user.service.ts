@@ -19,7 +19,7 @@ export class UserService {
     return of(user);
   }
 
-  addUser(user: User): Observable<void> {
+  addUser(user: User): Observable<null> {
     if (!user.id) {
       user.id = (this.users.length + 1).toString();  
     }
@@ -28,18 +28,18 @@ export class UserService {
       user.age = this.calculateAge(user.dateOfBirth);
     }
     this.users.push({ ...user });  
-    return of();
+    return of(null);
   }
   
-  updateUser(updatedUser: User): Observable<void> {
-    const index = this.users.findIndex(user => user.id === updatedUser.id);
-    if (index !== -1) {
-        this.users[index] = { ...this.users[index], ...updatedUser };  // Merge existing user data with updated data
-    } else {
-        console.error('User not found, cannot update');
+    updateUser(updatedUser: User): Observable<null> {
+      const index = this.users.findIndex(user => user.id === updatedUser.id);
+      if (index !== -1) {
+          this.users[index] = { ...this.users[index], ...updatedUser };  // Merge existing user data with updated data
+      } else {
+          console.error('User not found, cannot update');
+      }
+      return of(null);
     }
-    return of();
-}
 
   updateUserPhoto(id: string, photoUrl: string | ArrayBuffer | null): Observable<void> {
     const index = this.users.findIndex(user => user.id === id);
