@@ -1,0 +1,68 @@
+<div class="container">
+  <h2>User List</h2>
+  <button class="btn btn-success mb-3" (click)="addUser()">Add User</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Occupation</th>
+        <th>Gender</th>
+        <th>Date of Birth</th>
+        <th>Age</th>
+        <th>Created Date</th> <!-- New column for Created Date -->
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of paginatedUsers">
+        <td>
+          <div class="photo-container">
+            <img [src]="user.photo" alt="User Photo" class="user-photo" />
+          </div>
+        </td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.occupation }}</td>
+        <td>{{ user.gender }}</td>
+        <td>{{ user.dateOfBirth }}</td>
+        <td>{{ user.age }}</td>
+        <td>{{ user.createdDate | date:'medium' }}</td> <!-- Display Created Date -->
+        <td>
+          <button class="btn btn-primary" (click)="editUser(user.id!.toString())">Edit</button>
+          <button class="btn btn-danger" (click)="showDeleteConfirmation(user.id!.toString())">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination Controls -->
+  <div class="pagination">
+    <button *ngFor="let page of pages" 
+            class="btn btn-secondary page-button" 
+            (click)="goToPage(page)" 
+            [ngClass]="{'active': page === currentPage}">
+      {{ page }}
+    </button>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this user?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancelDelete()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>

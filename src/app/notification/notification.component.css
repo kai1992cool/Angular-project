@@ -1,0 +1,47 @@
+/* Container to position notifications in the top-right corner */
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050; /* Ensure it appears above other content */
+  width: 300px; /* You can adjust the width as needed */
+}
+
+/* Each notification styling */
+.notification {
+  position: relative;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 0;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Show and hide classes */
+.notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notification.hide {
+  opacity: 0;
+  transform: translateY(-10px); /* Slide up when hiding */
+}
+
+/* Close button styling */
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 35px;
+  color: #721c24;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}

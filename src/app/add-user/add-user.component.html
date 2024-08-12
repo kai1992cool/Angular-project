@@ -1,0 +1,73 @@
+<div class="container">
+  <h2>Add User</h2>
+  <form [formGroup]="userForm" (ngSubmit)="handleSubmit()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input id="firstName" formControlName="firstName" class="form-control" />
+      <div *ngIf="userForm.controls['firstName'].invalid && userForm.controls['firstName'].touched" class="text-danger">
+        First Name is required and cannot contain numbers.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input id="lastName" formControlName="lastName" class="form-control" />
+      <div *ngIf="userForm.controls['lastName'].invalid && userForm.controls['lastName'].touched" class="text-danger">
+        Last Name is required and cannot contain numbers.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="occupation">Occupation</label>
+      <input id="occupation" formControlName="occupation" class="form-control" />
+      <div *ngIf="userForm.controls['occupation'].invalid && userForm.controls['occupation'].touched" class="text-danger">
+        Occupation is required and cannot contain numbers.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select id="gender" formControlName="gender" class="form-control">
+        <option value="">Please select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+      <div *ngIf="userForm.controls['gender'].invalid && userForm.controls['gender'].touched" class="text-danger">
+        Gender is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth</label>
+      <input id="dateOfBirth" type="date" formControlName="dateOfBirth" class="form-control" />
+      <div *ngIf="userForm.controls['dateOfBirth'].invalid && userForm.controls['dateOfBirth'].touched" class="text-danger">
+        Date of Birth is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="photo">Photo</label>
+      <input id="photo" type="file" (change)="onFileChange($event)" class="form-control" />
+      <img *ngIf="photoUrl" [src]="photoUrl" alt="User Photo" class="img-thumbnail mt-2" width="100" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+  </form>
+</div>
+
+<app-notification [message]="notificationMessage"></app-notification>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel">Confirm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to save the user?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="confirmAddUserAndNavigate()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
